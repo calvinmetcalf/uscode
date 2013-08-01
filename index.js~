@@ -1,18 +1,33 @@
 "use strict";
-let xml2js = require('xml2js');
-let parser = new xml2js.Parser;
-let fs = require('fs');
+const xml2js = require('xml2js');
+const parser = new xml2js.Parser;
+const fs = require('fs');
+const async = require('async');
 
 fs.readdir('.',function(err,files){
-	files.forEach(function(file){
+	async.eachLimit(files,3,dealFile,function(){
+	console.log('done');
+	})
+});
+
+function dealFile(file, cb){
 		if(file.slice(-4)==='.xml'){
 			fs.readFile('./'+file,{encoding:'utf8'},function(err,string){
 				parser.parseString(string,function(err,rslt){
-					fs.writeFile(string.slice(0,'-4'),rslt,{encoding:'utf8'},function(err){
+					fs.writeFile(string.slice(0,'-4')+'.json',rslt,{encoding:'utf8'},function(err){
+						if(err){
+							console.log(err);
+							cb(err);
+						}else{
 						console.log('done with ',file);
+						cb();
+						}
+						
+						
 					});
 				});
 			});
+		}else{
+		cb();
 		}
-	});
-});
+	}

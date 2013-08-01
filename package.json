@@ -6,7 +6,9 @@
   "dependencies": {
     "xml2js": "~0.2.8"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "async": "~0.2.9"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
