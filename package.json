@@ -1,0 +1,15 @@
+{
+  "name": "uscode",
+  "version": "0.0.0",
+  "description": "the law!",
+  "main": "index.js",
+  "dependencies": {
+    "xml2js": "~0.2.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "Public Domain"
+}
