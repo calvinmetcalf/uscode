@@ -5,7 +5,7 @@ const fs = require('fs');
 const async = require('async');
 
 fs.readdir('.',function(err,files){
-	async.eachLimit(files,3,dealFile,function(){
+	async.eachLimit(files,1,dealFile,function(){
 	console.log('done');
 	})
 });
@@ -14,7 +14,7 @@ function dealFile(file, cb){
 		if(file.slice(-4)==='.xml'){
 			fs.readFile('./'+file,{encoding:'utf8'},function(err,string){
 				parser.parseString(string,function(err,rslt){
-					fs.writeFile(file.slice(0,'-4')+'.json',rslt,{encoding:'utf8'},function(err){
+					fs.writeFile(file.slice(0,'-4')+'.json',JSON.stringify(rslt),{encoding:'utf8'},function(err){
 						if(err){
 							console.log(err);
 							cb(err);
